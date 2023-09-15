@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo: Meetups: Static File Rendering</title>
+    <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}">
+</head>
+<body>
+    <h1>Meetups: Static File Rendering</h1>
+
+    <h2>Meetups Summary</h2>
+
+    {% if show_meetups %}
+       {% for item in meetups %}
+       <h4>{{item.title}}</h4>
+       {% endfor %}
+    {% else %}
+        <h3>No Meetups found</h3>
+    {% endif %}
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore officiis temporibus nisi in distinctio aspernatur repudiandae eum magni alias facere, dolores sapiente iusto debitis officia hic? Quod pariatur illum fuga.</p>
+
+    <h5>Details</h5>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque cumque at architecto voluptas dolor aperiam quos assumenda rem unde soluta. Fugit veritatis deleniti pariatur atque eos qui fugiat illum voluptates.
+   te quasi, adipisci ipsam corporis, sint qui animi error corrupti voluptatum? Sed molestias magni sunt doloremque expedita odit delectus non deserunt doloribus nostrum, amet atque?
+</body>
+</html>
