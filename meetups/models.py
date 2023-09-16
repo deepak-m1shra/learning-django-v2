@@ -7,3 +7,6 @@ class Meetup(models.Model):
     location = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)
     image = models.ImageField(upload_to='images')
+    
+    def __str__(self) -> str:
+        return f'{self.title} - {self.location}'
