@@ -1,54 +1,56 @@
+{% extends 'meetups/base/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo: Meetups: Static File Rendering</title>
-    <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}">
+
+{% block title %}
+    Demo: Meetups: Static File Rendering
+{% endblock %}
+
+{% block site_css %}
     <link rel="stylesheet" href="{% static 'meetups/styles/all-meetups.css' %}">
-</head>
-<body>
+{% endblock %}
+
+{% block main_heading %}
+    Great meetups coming soon, stay tuned!
+{% endblock %}
+
+{% block header_content %}
+    <p>Choose the one that suits you best</p>
+{% endblock %}
+
+{% block body %}
+<section>
+    <h2>Upcoming Meetups</h2>
+    <ol>
+        {% for meetup in meetups %}
+            <li class="meetup-item">
+                <article>
+                    <div class="meetup-summary">
+                        <div class="meetup-image">
+                            <img src="" alt="">
+                        </div>
+                        <div class="meetup-details">
+                            <h3>{{ meetup.title }}</h3>
+                            <address>{{ meetup.location }}</address>
+                        </div>
+                    </div>
+                    <div class="meetup-actions">
+                        <!-- The following is one way to make it work, however not scalable when working with a big site with many pages (we use url in that case as illustrated below) -->
+                        <!-- <a href="/meetups/{{ meetup.slug}}" class="btn">More details</a> -->
+                        <a href="{% url 'meetup-detail' meetup.slug %}" class="btn">More details</a>
+
+                    </div>
+                </article>
+            </li>
+        {% endfor %}
+    </ol>
+</section>
+{% endblock %}
 
     <header id="main-header">
         <nav>
             <a href="/meetups" id="main-logo">DjangoMeetups</a>
-            <h1>Great meetups coming soon, stay tuned!</h1>
-            <p>Choose the one that suits you best</p>
         </nav>
     </header>
-
-    <main>
-        <section>
-            <h2>Upcoming Meetups</h2>
-            <ol>
-                {% for meetup in meetups %}
-                    <li class="meetup-item">
-                        <article>
-                            <div class="meetup-summary">
-                                <div class="meetup-image">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="meetup-details">
-                                    <h3>{{ meetup.title }}</h3>
-                                    <address>{{ meetup.location }}</address>
-                                </div>
-                            </div>
-                            <div class="meetup-actions">
-                                <!-- The following is one way to make it work, however not scalable when working with a big site with many pages (we use url in that case as illustrated below) -->
-                                <!-- <a href="/meetups/{{ meetup.slug}}" class="btn">More details</a> -->
-                                <a href="{% url 'meetup-detail' meetup.slug %}" class="btn">More details</a>
-
-                            </div>
-                        </article>
-                    </li>
-                {% endfor %}
-            </ol>
-        </section>
-    </main>
-
-
-
 
     <!-- This section belongs to initial lectures -->
     <h2>Past Meetups (Static File Rendering)</h2>
