@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo: Meetups: Static File Rendering</title>
+    <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}">
+    <link rel="stylesheet" href="{% static 'meetups/styles/all-meetups.css' %}">
+</head>
+<body>
+
+    <header id="main-header">
+        <nav>
+            <a href="/meetups" id="main-logo">DjangoMeetups</a>
+            <h1>Great meetups coming soon, stay tuned!</h1>
+            <p>Choose the one that suits you best</p>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Upcoming Meetups</h2>
+            <ol>
+                {% for meetup in meetups %}
+                    <li class="meetup-item">
+                        <article>
+                            <div class="meetup-summary">
+                                <div class="meetup-image">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="meetup-details">
+                                    <h3>{{ meetup.title }}</h3>
+                                    <address>{{ meetup.location }}</address>
+                                </div>
+                            </div>
+                            <div class="meetup-actions">
+                                <!-- The following is one way to make it work, however not scalable when working with a big site with many pages (we use url in that case as illustrated below) -->
+                                <!-- <a href="/meetups/{{ meetup.slug}}" class="btn">More details</a> -->
+                                <a href="{% url 'meetup-detail' meetup.slug %}" class="btn">More details</a>
+
+                            </div>
+                        </article>
+                    </li>
+                {% endfor %}
+            </ol>
+        </section>
+    </main>
+
+
+
+
+    <!-- This section belongs to initial lectures -->
+    <h2>Past Meetups (Static File Rendering)</h2>
+
+    {% if show_meetups %}
+       {% for item in meetups %}
+       <h4>{{item.title}}</h4>
+       {% endfor %}
+    {% else %}
+        <h3>No Meetups found</h3>
+    {% endif %}
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore officiis temporibus nisi in distinctio aspernatur repudiandae eum magni alias facere, dolores sapiente iusto debitis officia hic? Quod pariatur illum fuga.</p>
+
+    <h5>Details</h5>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque cumque at architecto voluptas dolor aperiam quos assumenda rem unde soluta. Fugit veritatis deleniti pariatur atque eos qui fugiat illum voluptates.
+   te quasi, adipisci ipsam corporis, sint qui animi error corrupti voluptatum? Sed molestias magni sunt doloremque expedita odit delectus non deserunt doloribus nostrum, amet atque?
+</body>
+</html>
