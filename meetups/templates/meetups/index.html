@@ -22,25 +22,7 @@
     <h2>Upcoming Meetups</h2>
     <ol>
         {% for meetup in meetups %}
-            <li class="meetup-item">
-                <article>
-                    <div class="meetup-summary">
-                        <div class="meetup-image">
-                            <img src="" alt="">
-                        </div>
-                        <div class="meetup-details">
-                            <h3>{{ meetup.title }}</h3>
-                            <address>{{ meetup.location }}</address>
-                        </div>
-                    </div>
-                    <div class="meetup-actions">
-                        <!-- The following is one way to make it work, however not scalable when working with a big site with many pages (we use url in that case as illustrated below) -->
-                        <!-- <a href="/meetups/{{ meetup.slug}}" class="btn">More details</a> -->
-                        <a href="{% url 'meetup-detail' meetup.slug %}" class="btn">More details</a>
-
-                    </div>
-                </article>
-            </li>
+            {% include 'meetups/includes/meetup-item.html' with  title=meetup.title location=meetup.location %}
         {% endfor %}
     </ol>
 </section>
