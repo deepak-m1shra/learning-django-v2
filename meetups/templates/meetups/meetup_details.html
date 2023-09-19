@@ -19,19 +19,34 @@
         <img src="" alt="">
         <section id="location">
             <h2>Meetup Location</h2>
-            <address>This meetup is taking place <span>{{meetup.location}}</span>(ADDRESS).</address>
+            <address>This meetup is taking place at <span>{{meetup.location}}</span>.</address>
         </section>
         <section id="details">
             <h2>What's this Meetup about?</h2>
+            <img src="{{ meetup.image.url }}" alt="Meetup location" id="main-image">
             <p>{{ meetup.description }}</p>
             <footer>
-                <p>Need more details? Please <a href="tel:+1-1234">contact the organizer</a> but don't spam us :)</p>
+                <p>Need more details? Please <a href="mailto:{{ meetup.organizer }}">contact the organizer</a> but don't spam us :)</p>
             </footer>
         </section>
         <section id="registration">
             <h2>Join Us!</h2>
-            FORM
-        </section>
+            <form action="{% url 'meetup-details' meetup.slug %}" method="POST">
+              {% csrf_token %}
+              <!-- <ul>
+                {{ form.as_ul }}
+              </ul> -->
+              <!-- <table>
+                {{ form.as_table }}
+              </table> -->
+              <p>
+                {{ form.as_p }}
+              </p>
+              <div id="registration-actions">
+                <button>Register</button>
+              </div>
+            </form>
+          </section>
     </article>
     {% else %}
         <p>No meetup found!!</p>
